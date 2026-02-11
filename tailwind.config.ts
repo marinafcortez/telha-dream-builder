@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Montserrat', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -56,6 +60,14 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        brand: {
+          navy: "hsl(var(--brand-navy))",
+          "navy-dark": "hsl(var(--brand-navy-dark))",
+          gold: "hsl(var(--brand-gold))",
+          "gold-light": "hsl(var(--brand-gold-light))",
+          "gold-dark": "hsl(var(--brand-gold-dark))",
+          warm: "hsl(var(--brand-warm))",
         },
       },
       borderRadius: {
