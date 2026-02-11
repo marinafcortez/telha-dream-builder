@@ -50,11 +50,11 @@ const Footer = () => {
             <ul className="space-y-3 text-sm text-primary-foreground/70">
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 text-brand-gold shrink-0" />
-                <span>Imperatriz - MA</span>
+                <span>Timon - MA</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={16} className="text-brand-gold shrink-0" />
-                <span>(99) 99999-9999</span>
+                <a href="https://wa.me/559931183000" className="hover:text-brand-gold transition-colors">(99) 3118-3000</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={16} className="text-brand-gold shrink-0" />
