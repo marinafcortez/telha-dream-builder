@@ -13,7 +13,7 @@ const modelos: Record<string, number> = {
   Romaninha: 26,
   Romana: 16,
   Portuguesa: 16,
-  Suprema: 12,
+  Suprema: 10.7,
 };
 
 const Calculadora = () => {

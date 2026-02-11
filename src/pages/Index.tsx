@@ -3,19 +3,24 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Calculator, Package, Users, Clock, ChevronRight, Shield, Truck } from "lucide-react";
+import portuguesaImg from "@/assets/portuguesa-frente.png";
+import romanaImg from "@/assets/romana-frente.png";
+import producaoImg from "@/assets/producao-telhas.jpg";
+import roboImg from "@/assets/robo-fabrica.jpg";
+import paletizacaoVideo from "@/assets/paletizacao-video.mp4";
 
 const stats = [
-  { number: "48+", label: "Anos de Mercado", icon: Clock },
+  { number: "46+", label: "Anos de Mercado", icon: Clock },
   { number: "500+", label: "Parceiros", icon: Users },
   { number: "4", label: "Modelos de Telhas", icon: Package },
   { number: "100%", label: "Paletizado", icon: Shield },
 ];
 
 const products = [
-  { name: "Romaninha", desc: "Versátil e econômica, ideal para diversos projetos." },
-  { name: "Romana", desc: "Design clássico com encaixe perfeito." },
-  { name: "Portuguesa", desc: "Elegância e tradição para coberturas sofisticadas." },
-  { name: "Suprema", desc: "Nossa linha premium com acabamento superior." },
+  { name: "Romaninha", desc: "Versátil e econômica, ideal para diversos projetos.", image: producaoImg },
+  { name: "Romana", desc: "Encaixe preciso, resistência e estética.", image: romanaImg },
+  { name: "Portuguesa", desc: "Tradição e alta eficiência na drenagem.", image: portuguesaImg },
+  { name: "Suprema", desc: "A maior telha cerâmica do Brasil.", image: roboImg },
 ];
 
 const fadeUp = {
@@ -138,8 +143,13 @@ const Home = () => {
                 variants={fadeUp}
                 className="group bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow"
               >
-                <div className="aspect-[4/3] bg-muted flex items-center justify-center">
-                  <Package className="text-muted-foreground/30" size={48} />
+                <div className="aspect-[4/3] bg-white overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={`Telha ${product.name}`}
+                    className="w-full h-full object-contain p-2"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="p-5">
                   <h3 className="font-display font-bold text-lg text-foreground mb-1">{product.name}</h3>
@@ -197,8 +207,15 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="aspect-[4/3] bg-muted rounded-xl flex items-center justify-center">
-                <Truck className="text-muted-foreground/30" size={64} />
+              <div className="aspect-video rounded-xl overflow-hidden">
+                <video
+                  src={paletizacaoVideo}
+                  controls
+                  className="w-full h-full object-cover"
+                  poster={roboImg}
+                >
+                  Seu navegador não suporta vídeos.
+                </video>
               </div>
             </motion.div>
             <motion.div
