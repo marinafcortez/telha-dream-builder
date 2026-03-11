@@ -22,83 +22,115 @@ const modelos = [
 
 const TelhadoSVG = ({ inclinacao, largura, comprimento }: { inclinacao: number; largura: number; comprimento: number }) => {
   const svgW = 500;
-  const svgH = 260;
-  const baseY = 200;
-  const baseLeft = 80;
-  const baseRight = svgW - 80;
+  const svgH = 280;
+  const baseY = 220;
+
+  // Scale house width based on largura (2–20m → narrow to wide)
+  const widthFrac = (largura - 2) / 18; // 0..1
+  const houseHalfW = 100 + widthFrac * 80; // 100..180 px half-width
+  const baseLeft = svgW / 2 - houseHalfW;
+  const baseRight = svgW / 2 + houseHalfW;
   const baseMid = svgW / 2;
-  const halfSpan = (baseRight - baseLeft) / 2;
-  const cumeeira = baseY - halfSpan * (inclinacao / 100);
-  
-  // 3D depth offset
-  const depth = 30;
-  const depthX = 20;
+
+  // Scale depth based on comprimento (2–50m → shallow to deep)
+  const depthFrac = (comprimento - 2) / 48;
+  const depth = 15 + depthFrac * 35; // 15..50 px
+  const depthX = 10 + depthFrac * 25; // 10..35 px
+
+  // Inclinação: amplify visually so 30% looks like a proper roof
+  // Real 30% slope = decent pitch. We scale so the range 10-60% maps to visible angles.
+  const roofHeight = houseHalfW * (inclinacao / 100) * 1.8;
+  const cumeeira = baseY - 45 - roofHeight;
+  const wallH = 45;
 
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" style={{ filter: "drop-shadow(0 4px 12px hsl(var(--brand-navy) / 0.25))" }}>
       {/* Back wall (3D depth) */}
-      <rect x={baseLeft + depthX} y={baseY - depth - 40} width={baseRight - baseLeft} height={40} className="fill-muted/60 stroke-border" strokeWidth={1} />
-      
+      <motion.rect
+        animate={{ x: baseLeft + depthX, y: baseY - depth - wallH, width: baseRight - baseLeft, height: wallH }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
+        className="fill-muted/60 stroke-border" strokeWidth={1}
+      />
+
       {/* Side wall right (3D) */}
       <motion.polygon
-        animate={{ points: `${baseRight},${baseY} ${baseRight + depthX},${baseY - depth} ${baseRight + depthX},${baseY - depth - 40} ${baseRight},${baseY - 40}` }}
+        animate={{ points: `${baseRight},${baseY} ${baseRight + depthX},${baseY - depth} ${baseRight + depthX},${baseY - depth - wallH} ${baseRight},${baseY - wallH}` }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         className="fill-muted/40 stroke-border" strokeWidth={1}
       />
 
       {/* Front wall */}
-      <rect x={baseLeft} y={baseY - 40} width={baseRight - baseLeft} height={40} rx={1} className="fill-muted stroke-border" strokeWidth={1.5} />
-      
+      <motion.rect
+        animate={{ x: baseLeft, y: baseY - wallH, width: baseRight - baseLeft, height: wallH }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
+        rx={1} className="fill-muted stroke-border" strokeWidth={1.5}
+      />
+
       {/* Door */}
-      <rect x={baseMid - 12} y={baseY - 30} width={24} height={30} rx={1} className="fill-brand-navy/20 stroke-border" strokeWidth={1} />
-      
+      <motion.rect
+        animate={{ x: baseMid - 12, y: baseY - 32, width: 24, height: 32 }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
+        rx={1} className="fill-brand-navy/20 stroke-border" strokeWidth={1}
+      />
+
       {/* Window left */}
-      <rect x={baseLeft + 30} y={baseY - 32} width={18} height={14} rx={1} className="fill-accent/20 stroke-border" strokeWidth={1} />
+      <motion.rect
+        animate={{ x: baseLeft + 25, y: baseY - wallH + 10, width: 16, height: 13 }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
+        rx={1} className="fill-accent/20 stroke-border" strokeWidth={1}
+      />
       {/* Window right */}
-      <rect x={baseRight - 48} y={baseY - 32} width={18} height={14} rx={1} className="fill-accent/20 stroke-border" strokeWidth={1} />
+      <motion.rect
+        animate={{ x: baseRight - 41, y: baseY - wallH + 10, width: 16, height: 13 }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
+        rx={1} className="fill-accent/20 stroke-border" strokeWidth={1}
+      />
 
       {/* Back roof pane (3D) */}
       <motion.polygon
-        animate={{ points: `${baseLeft + depthX},${baseY - depth - 40} ${baseMid + depthX},${cumeeira - depth} ${baseRight + depthX},${baseY - depth - 40}` }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        animate={{ points: `${baseLeft + depthX},${baseY - depth - wallH} ${baseMid + depthX},${cumeeira - depth} ${baseRight + depthX},${baseY - depth - wallH}` }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         className="fill-brand-navy/50 stroke-brand-gold/50" strokeWidth={1.5}
       />
 
-      {/* Roof left pane */}
+      {/* Roof left side (3D face) */}
       <motion.polygon
-        animate={{ points: `${baseLeft},${baseY - 40} ${baseMid},${cumeeira} ${baseMid + depthX},${cumeeira - depth} ${baseLeft + depthX},${baseY - depth - 40}` }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        animate={{ points: `${baseLeft},${baseY - wallH} ${baseMid},${cumeeira} ${baseMid + depthX},${cumeeira - depth} ${baseLeft + depthX},${baseY - depth - wallH}` }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         className="fill-brand-navy/70 stroke-brand-gold" strokeWidth={2}
       />
 
-      {/* Roof right pane */}
+      {/* Roof right side (3D face) */}
       <motion.polygon
-        animate={{ points: `${baseRight},${baseY - 40} ${baseMid},${cumeeira} ${baseMid + depthX},${cumeeira - depth} ${baseRight + depthX},${baseY - depth - 40}` }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        animate={{ points: `${baseRight},${baseY - wallH} ${baseMid},${cumeeira} ${baseMid + depthX},${cumeeira - depth} ${baseRight + depthX},${baseY - depth - wallH}` }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         className="fill-brand-navy/85 stroke-brand-gold" strokeWidth={2}
       />
 
       {/* Front roof triangle */}
       <motion.polygon
-        animate={{ points: `${baseLeft},${baseY - 40} ${baseMid},${cumeeira} ${baseRight},${baseY - 40}` }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        animate={{ points: `${baseLeft},${baseY - wallH} ${baseMid},${cumeeira} ${baseRight},${baseY - wallH}` }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         className="fill-brand-navy/80 stroke-brand-gold" strokeWidth={2}
       />
 
       {/* Tile lines on front pane */}
-      {[0.25, 0.5, 0.75].map((frac) => {
+      {[0.2, 0.4, 0.6, 0.8].map((frac) => {
+        const roofTopY = baseY - wallH;
+        const lineY = roofTopY + (cumeeira - roofTopY) * frac;
         const lx = baseLeft + (baseMid - baseLeft) * frac;
         const rx = baseMid + (baseRight - baseMid) * frac;
         return (
           <motion.g key={frac}>
             <motion.line
-              animate={{ x1: lx, y1: baseY - 40 + (cumeeira - baseY + 40) * frac, x2: baseMid, y2: baseY - 40 + (cumeeira - baseY + 40) * frac }}
-              transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              className="stroke-brand-gold/30" strokeWidth={0.8}
+              animate={{ x1: lx, y1: lineY, x2: baseMid, y2: lineY }}
+              transition={{ type: "spring", stiffness: 250, damping: 28 }}
+              className="stroke-brand-gold/25" strokeWidth={0.7}
             />
             <motion.line
-              animate={{ x1: baseMid, y1: baseY - 40 + (cumeeira - baseY + 40) * frac, x2: rx, y2: baseY - 40 + (cumeeira - baseY + 40) * frac }}
-              transition={{ type: "spring", stiffness: 280, damping: 28 }}
-              className="stroke-brand-gold/30" strokeWidth={0.8}
+              animate={{ x1: baseMid, y1: lineY, x2: rx, y2: lineY }}
+              transition={{ type: "spring", stiffness: 250, damping: 28 }}
+              className="stroke-brand-gold/25" strokeWidth={0.7}
             />
           </motion.g>
         );
@@ -107,17 +139,20 @@ const TelhadoSVG = ({ inclinacao, largura, comprimento }: { inclinacao: number; 
       {/* Cumeeira ridge dot */}
       <motion.circle
         animate={{ cy: cumeeira }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         cx={baseMid} r={3.5} className="fill-brand-gold"
       />
 
       {/* Dimension labels */}
-      <text x={baseMid} y={baseY + 16} textAnchor="middle" className="fill-muted-foreground text-[10px]">
-        {largura.toFixed(1)}m × {comprimento.toFixed(1)}m
-      </text>
       <motion.text
-        animate={{ y: cumeeira - 8 }}
-        transition={{ type: "spring", stiffness: 280, damping: 28 }}
+        animate={{ x: baseMid }}
+        x={baseMid} y={baseY + 16} textAnchor="middle" className="fill-muted-foreground text-[10px]"
+      >
+        {largura.toFixed(1)}m × {comprimento.toFixed(1)}m
+      </motion.text>
+      <motion.text
+        animate={{ y: Math.max(cumeeira - 8, 12) }}
+        transition={{ type: "spring", stiffness: 250, damping: 28 }}
         x={baseMid} textAnchor="middle" className="fill-brand-gold text-[10px] font-bold"
       >
         ▲ {inclinacao}%
