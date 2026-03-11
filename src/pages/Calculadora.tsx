@@ -22,17 +22,26 @@ const modelos = [
 
 const TelhadoSVG = ({ inclinacao, largura, comprimento }: { inclinacao: number; largura: number; comprimento: number }) => {
   const svgW = 500;
-  const svgH = 260;
-  const baseY = 200;
-  const baseLeft = 80;
-  const baseRight = svgW - 80;
+  const svgH = 280;
+  const baseY = 220;
+
+  // Scale house width based on largura (2–20m → narrow to wide)
+  const widthFrac = (largura - 2) / 18; // 0..1
+  const houseHalfW = 100 + widthFrac * 80; // 100..180 px half-width
+  const baseLeft = svgW / 2 - houseHalfW;
+  const baseRight = svgW / 2 + houseHalfW;
   const baseMid = svgW / 2;
-  const halfSpan = (baseRight - baseLeft) / 2;
-  const cumeeira = baseY - halfSpan * (inclinacao / 100);
-  
-  // 3D depth offset
-  const depth = 30;
-  const depthX = 20;
+
+  // Scale depth based on comprimento (2–50m → shallow to deep)
+  const depthFrac = (comprimento - 2) / 48;
+  const depth = 15 + depthFrac * 35; // 15..50 px
+  const depthX = 10 + depthFrac * 25; // 10..35 px
+
+  // Inclinação: amplify visually so 30% looks like a proper roof
+  // Real 30% slope = decent pitch. We scale so the range 10-60% maps to visible angles.
+  const roofHeight = houseHalfW * (inclinacao / 100) * 1.8;
+  const cumeeira = baseY - 45 - roofHeight;
+  const wallH = 45;
 
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full max-w-sm mx-auto" style={{ filter: "drop-shadow(0 4px 12px hsl(var(--brand-navy) / 0.25))" }}>
