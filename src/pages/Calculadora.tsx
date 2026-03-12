@@ -14,7 +14,7 @@ import producaoImg from "@/assets/producao-telhas.jpg";
 import roboImg from "@/assets/robo-fabrica.jpg";
 
 const modelos = [
-  { id: 1, nome: "Romaninha", rendimentoM2: 26, pesoKg: 2.4, imagem: producaoImg },
+  { id: 1, nome: "Romaninha", rendimentoM2: 16, pesoKg: 2.4, imagem: producaoImg },
   { id: 2, nome: "Romana", rendimentoM2: 16, pesoKg: 3.0, imagem: romanaImg },
   { id: 3, nome: "Portuguesa", rendimentoM2: 16, pesoKg: 2.8, imagem: portuguesaImg },
   { id: 4, nome: "Suprema", rendimentoM2: 10.7, pesoKg: 4.5, imagem: roboImg },
