@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Calculator, Package, Users, Clock, ChevronRight, Shield, Truck } from "lucide-react";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import portuguesaImg from "@/assets/portuguesa-frente.png";
 import romanaImg from "@/assets/romana-frente.png";
 import producaoImg from "@/assets/producao-telhas.jpg";
@@ -10,10 +11,10 @@ import roboImg from "@/assets/robo-fabrica.jpg";
 import paletizacaoVideo from "@/assets/paletizacao-video.mp4";
 
 const stats = [
-  { number: "46+", label: "Anos de Mercado", icon: Clock },
-  { number: "500+", label: "Parceiros", icon: Users },
-  { number: "4", label: "Modelos de Telhas", icon: Package },
-  { number: "100%", label: "Paletizado", icon: Shield },
+  { number: 46, suffix: "+", label: "Anos de Mercado", icon: Clock },
+  { number: 500, suffix: "+", label: "Parceiros", icon: Users },
+  { number: 4, suffix: "", label: "Modelos de Telhas", icon: Package },
+  { number: 100, suffix: "%", label: "Paletizado", icon: Shield },
 ];
 
 const products = [
@@ -107,7 +108,9 @@ const Home = () => {
                 className="text-center p-6 rounded-xl bg-card border border-border"
               >
                 <stat.icon className="mx-auto mb-3 text-brand-gold" size={28} />
-                <p className="font-display text-3xl md:text-4xl font-bold text-foreground">{stat.number}</p>
+                <p className="font-display text-3xl md:text-4xl font-bold text-foreground">
+                  <AnimatedCounter target={stat.number} suffix={stat.suffix} />
+                </p>
                 <p className="text-muted-foreground text-sm mt-1">{stat.label}</p>
               </motion.div>
             ))}
