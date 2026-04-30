@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Calculator, Package, Users, Clock, ChevronRight, Shield, Truck } from "lucide-react";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import { anosDeMercado } from "@/lib/constants";
 import portuguesaImg from "@/assets/portuguesa-frente.png";
 import romanaImg from "@/assets/romana-frente.png";
 import producaoImg from "@/assets/producao-telhas.jpg";
@@ -11,7 +12,7 @@ import roboImg from "@/assets/robo-fabrica.jpg";
 import paletizacaoVideo from "@/assets/paletizacao-video.mp4";
 
 const stats = [
-  { number: 46, suffix: "+", label: "Anos de Mercado", icon: Clock },
+  { number: anosDeMercado(), suffix: "+", label: "Anos de Mercado", icon: Clock },
   { number: 500, suffix: "+", label: "Parceiros", icon: Users },
   { number: 4, suffix: "", label: "Modelos de Telhas", icon: Package },
   { number: 100, suffix: "%", label: "Paletizado", icon: Shield },

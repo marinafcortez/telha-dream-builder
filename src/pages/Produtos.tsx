@@ -12,7 +12,7 @@ const telhas = [
     image: producaoImg,
     versions: ["Natural", "Resinada"],
     specs: {
-      rendimento: "26 telhas/m²",
+      rendimento: "16 telhas/m²",
       dimensoes: "20,4 x 39,7 cm",
       galga: "32 cm",
       inclinacao: "30%",
@@ -85,7 +85,7 @@ const Produtos = () => {
             transition={{ delay: 0.1 }}
             className="text-primary-foreground/70 max-w-2xl mx-auto text-lg"
           >
-            Telhas de alta qualidade produzidas com argila selecionada, disponíveis nas versões Natural e Resinada. Todos os modelos são resinados.
+            Telhas de alta qualidade produzidas com argila selecionada, disponíveis nas versões Natural e Resinada.
           </motion.p>
         </div>
       </section>
