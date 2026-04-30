@@ -302,7 +302,7 @@ const Calculadora = () => {
               <p className="text-muted-foreground text-[10px] text-center">* Inclui 5% de margem de quebra</p>
 
               <div className="space-y-2 pt-1">
-                <a href={`https://wa.me/5599311830000?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer" className="block">
+                <a href={`https://wa.me/559931183000?text=${whatsappMsg}`} target="_blank" rel="noopener noreferrer" className="block">
                   <Button size="sm" className="w-full bg-[#25D366] hover:bg-[#1ebe57] text-white font-display font-semibold gap-2 text-xs">
                     <MessageCircle size={16} />
                     Orçamento via WhatsApp

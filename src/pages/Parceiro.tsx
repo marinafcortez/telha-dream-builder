@@ -9,12 +9,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { anosDeMercado } from "@/lib/constants";
 
 const beneficios = [
   { icon: TrendingUp, title: "Margens Competitivas", desc: "Condições comerciais que garantem boa rentabilidade." },
   { icon: Truck, title: "Entrega Paletizada", desc: "Produto íntegro e organizado no seu estoque." },
   { icon: HeadphonesIcon, title: "Suporte Dedicado", desc: "Equipe comercial à disposição para ajudar." },
-  { icon: Award, title: "Marca Reconhecida", desc: "48+ anos de tradição e qualidade comprovada." },
+  { icon: Award, title: "Marca Reconhecida", desc: `${anosDeMercado()}+ anos de tradição e qualidade comprovada.` },
 ];
 
 const estados = [

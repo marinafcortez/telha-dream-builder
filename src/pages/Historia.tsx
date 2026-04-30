@@ -1,6 +1,7 @@
 import Layout from "@/components/layout/Layout";
 import { motion } from "framer-motion";
 import { Clock, Users, MapPin, Award, Leaf, Cpu } from "lucide-react";
+import { anosDeMercado } from "@/lib/constants";
 import minaImg from "@/assets/mina-argila.jpeg";
 import roboImg from "@/assets/robo-fabrica.jpg";
 import producaoImg from "@/assets/producao-telhas.jpg";
@@ -11,7 +12,7 @@ const timeline = [
   { year: "1989", title: "Nova Sede", desc: "A fábrica do Maranhão se torna a sede da empresa, com a desativação da fábrica do Piauí." },
   { year: "1997", title: "Forno Túnel", desc: "Construção de nova fábrica com o primeiro forno túnel da região, aumentando e diversificando a produção com processo quase totalmente automatizado." },
   { year: "2017", title: "Nova Livramento", desc: "Inauguração da Nova Livramento: moagem a seco, prensas automatizadas, robôs na carga e descarga, secador contínuo e forno túnel de grande capacidade." },
-  { year: "2024", title: "46+ Anos de História", desc: "Mais de 500 parceiros e presença consolidada no Norte e Nordeste do Brasil, com tecnologia de ponta na produção." },
+  { year: "2024", title: `${anosDeMercado()}+ Anos de História`, desc: `Mais de 500 parceiros e ${anosDeMercado()}+ anos de presença consolidada no Norte e Nordeste do Brasil, com tecnologia de ponta na produção.` },
 ];
 
 const values = [
@@ -20,7 +21,7 @@ const values = [
   { icon: MapPin, title: "Alcance", desc: "Presença forte no Norte e Nordeste brasileiro, sede em Timon-MA." },
   { icon: Cpu, title: "Tecnologia", desc: "Robôs, prensas automatizadas, moinhos pendulares e processos de ponta." },
   { icon: Leaf, title: "Sustentabilidade", desc: "Planos de manejo florestal e substituição de lenha por combustíveis alternativos." },
-  { icon: Clock, title: "Tradição", desc: "46+ anos de experiência e pioneirismo no mercado cerâmico." },
+  { icon: Clock, title: "Tradição", desc: `${anosDeMercado()}+ anos de experiência e pioneirismo no mercado cerâmico.` },
 ];
 
 const Historia = () => {
